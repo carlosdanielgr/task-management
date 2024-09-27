@@ -1,0 +1,13 @@
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 1 1 1 1 #000;
+  background-color: var(--cl-primary);
+  height: 75px;
+  padding: 0.7rem;
+  &__logo {
+    border-radius: 0.5rem;
+  }
+}
