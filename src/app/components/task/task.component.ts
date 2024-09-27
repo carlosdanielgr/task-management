@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 
+export interface Task {
+  title: string;
+  description?: string;
+  completed: boolean;
+  people: any[];
+}
+
 @Component({
   selector: 'app-task',
   standalone: true,

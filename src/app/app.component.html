@@ -2,6 +2,9 @@
   <app-header />
   <article class="content">
     <app-task-filter />
+    <section class="content__tasks">
+      <app-task *ngFor="let item of tasks" />
+    </section>
   </article>
   <app-footer />
 </main>

@@ -1,0 +1,9 @@
+.create-task {
+  padding: 1rem;
+  &__buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+}
