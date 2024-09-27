@@ -1,29 +1,111 @@
 <div class="create-task">
   <h4 class="text-center">Crear tarea</h4>
-  <form>
+  <form [formGroup]="form">
     <div class="form-floating mb-3">
       <input
         type="email"
         class="form-control"
-        id="floatingInput"
-        placeholder="name@example.com"
+        id="title"
+        placeholder=""
+        formControlName="title"
       />
-      <label for="floatingInput">Título</label>
+      <label for="title">Título</label>
     </div>
-    <div class="form-floating">
-      <textarea
+    <div class="form-floating mb-3">
+      <input
+        type="date"
         class="form-control"
-        placeholder="Leave a comment here"
-        id="floatingTextarea2"
-        style="height: 100px"
-      ></textarea>
-      <label for="floatingTextarea2">Descripción</label>
+        id="date"
+        placeholder=""
+        formControlName="date"
+      />
+      <label for="date">Fecha límite</label>
+      <span *ngIf="date?.hasError('dateInvalid')" class="text-danger">
+        La fecha debe ser mayor o igual a la fecha actual.
+      </span>
     </div>
+    <ng-container formArrayName="people">
+      <div class="mb-3 d-flex justify-content-between">
+        <span>Personas asociadas:</span>
+        <button class="btn btn-sm btn-primary" (click)="addPerson()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <div
+        *ngFor="let person of people.controls; let i = index"
+        class="card mb-3"
+        [formGroupName]="i"
+      >
+        <div class="card-body">
+          <input
+            type="text"
+            class="mb-3 form-control"
+            id="name"
+            placeholder="Nombre"
+            formControlName="name"
+          />
+          <input
+            type="number"
+            class="mb-3 form-control"
+            id="age"
+            placeholder="Edad"
+            formControlName="age"
+          />
+          <div class="mb-3 d-flex justify-content-between">
+            <span>Habilidades:</span>
+            <button class="btn btn-sm btn-primary" (click)="addSkill(i)">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          <ng-container formArrayName="skills">
+            <ng-container
+              *ngFor="
+                let skill of person.controls['skills'].controls;
+                let iSkill = index
+              "
+            >
+              <div class="mb-3 d-flex gap-3 align-items-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="skill"
+                  placeholder="Habilidad"
+                  [formControl]="skill"
+                />
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="removeSkill(i, iSkill)"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="text-end">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="removePerson(i)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
     <div class="create-task__buttons">
       <button type="button" class="btn btn-danger" (click)="closeModal()">
         Cerrar
       </button>
-      <button type="button" class="btn btn-success">Guardar</button>
+      <button
+        type="button"
+        class="btn btn-success"
+        [disabled]="form.invalid"
+        (click)="saveTask()"
+      >
+        Guardar
+      </button>
     </div>
   </form>
 </div>

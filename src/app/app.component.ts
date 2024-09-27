@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.getCurrentTasks();
+    // this.getCurrentTasks();
   }
 
   getCurrentTasks() {
