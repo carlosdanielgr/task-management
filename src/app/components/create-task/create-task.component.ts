@@ -11,6 +11,7 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dateAfterOrEqualToday } from './date-validator';
 import { NgFor, NgIf } from '@angular/common';
+import { uniqueNameValidator } from './person-validator';
 
 type PersonForm = FormGroup<{
   name: FormControl<string | null>;
@@ -50,7 +51,16 @@ export class CreateTaskComponent implements OnInit {
 
   addPerson() {
     const personForm: PersonForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          uniqueNameValidator(
+            this.people.value.map((person) => person.name) as string[]
+          ),
+        ],
+      ],
       age: [null, [Validators.required, Validators.min(18)]],
       skills: this.fb.array([], Validators.required),
     });

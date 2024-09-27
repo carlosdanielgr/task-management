@@ -18,8 +18,8 @@ export class TaskService {
           (data) =>
             ({
               title: data.title,
-              completed: data.completed,
-              description: '',
+              completed: true,
+              date: new Date().toISOString().split('T')[0],
               people: [],
             } as Task)
         )

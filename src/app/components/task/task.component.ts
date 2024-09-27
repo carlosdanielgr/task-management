@@ -1,9 +1,9 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { EllipsisPipe } from 'src/app/pipes/ellipsis.pipe';
 
 export interface Task {
   title: string;
-  description: string;
+  date: string;
   completed: boolean;
   people: any[];
 }
@@ -11,14 +11,14 @@ export interface Task {
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [EllipsisPipe],
+  imports: [NgIf, NgFor],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
   @Input() task: Task = {
     title: '',
-    description: '',
+    date: '',
     completed: false,
     people: [],
   };

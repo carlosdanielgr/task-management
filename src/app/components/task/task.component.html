@@ -1,9 +1,12 @@
 <div class="card task">
-  <div class="card-body task__body">
-    <p role="button" class="card-title text-primary text-center">
+  <div class="text-end p-2">
+    <span class="text-secondary">{{ task.date }}</span>
+  </div>
+  <div class="card-body pt-0">
+    <h6 class="card-title text-primary text-center">
       {{ task.title }}
-    </p>
-    <span>{{ task.description | ellipsis }}</span>
+    </h6>
+    <div *ngIf="task.people.length; else notPersons"></div>
   </div>
   <div class="card-footer">
     <div class="form-check">
@@ -12,6 +15,7 @@
         type="checkbox"
         value=""
         id="flexCheckDefault"
+        [checked]="task.completed"
       />
       <label class="form-check-label" for="flexCheckDefault">
         Completada
@@ -19,3 +23,6 @@
     </div>
   </div>
 </div>
+<ng-template #notPersons>
+  <span>No hay personas vinculadas a esta tarea.</span>
+</ng-template>

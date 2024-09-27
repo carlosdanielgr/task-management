@@ -44,6 +44,12 @@
             placeholder="Nombre"
             formControlName="name"
           />
+          <span
+            *ngIf="person.get('name')?.hasError('nameAlreadyExists')"
+            class="text-danger"
+          >
+            El nombre de la persona ya existe.
+          </span>
           <input
             type="number"
             class="mb-3 form-control"
