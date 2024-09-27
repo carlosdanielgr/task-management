@@ -3,7 +3,7 @@
   <article class="content">
     <app-task-filter />
     <section class="content__tasks">
-      <app-task *ngFor="let item of tasks" />
+      <app-task *ngFor="let item of tasks" [task]="item" />
     </section>
   </article>
   <app-footer />

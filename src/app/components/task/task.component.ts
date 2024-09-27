@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { EllipsisPipe } from 'src/app/pipes/ellipsis.pipe';
 
 export interface Task {
   title: string;
-  description?: string;
+  description: string;
   completed: boolean;
   people: any[];
 }
@@ -10,8 +11,15 @@ export interface Task {
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [],
+  imports: [EllipsisPipe],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
-export class TaskComponent {}
+export class TaskComponent {
+  @Input() task: Task = {
+    title: '',
+    description: '',
+    completed: false,
+    people: [],
+  };
+}

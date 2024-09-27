@@ -1,0 +1,9 @@
+.task {
+  box-shadow: 0px 0px 10px #00000047;
+  &__body {
+    > p:hover {
+      transform: scale(1.1);
+      transition: all 0.5s;
+    }
+  }
+}
