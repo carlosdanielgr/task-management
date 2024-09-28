@@ -87,7 +87,11 @@ export class CreateTaskComponent implements OnInit {
   }
 
   saveTask() {
-    this.store.dispatch(actionNewTask(this.form.value));
+    this.store.dispatch(
+      actionNewTask({
+        task: this.form.value,
+      })
+    );
     this.closeModal();
   }
 

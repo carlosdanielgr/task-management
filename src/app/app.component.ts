@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@shared/interfaces/state.interface';
 import { selectorFilter, selectorTasks } from './state/selectors/task.selector';
 import { Subject, takeUntil } from 'rxjs';
-import { actionExternalTask } from './state/actions/task.action';
+import { actionNewTask } from './state/actions/task.action';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeSignal$))
       .subscribe({
         next: (res) => {
-          this.store.dispatch(actionExternalTask({ tasks: res }));
+          res.forEach((task) => {
+            this.store.dispatch(actionNewTask({ task }));
+          });
         },
       });
   }

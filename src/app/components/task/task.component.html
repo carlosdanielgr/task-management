@@ -30,13 +30,15 @@
   <div class="card-footer d-flex justify-content-end">
     <div class="form-check">
       <input
+        #checkComplete
         class="form-check-input"
         type="checkbox"
         value=""
-        id="flexCheckDefault"
-        [checked]="task.completed"
+        id="checkComplete-{{ id }}"
+        [formControl]="checkControl"
+        (change)="onToggleComplete()"
       />
-      <label class="form-check-label" for="flexCheckDefault">
+      <label class="form-check-label" for="checkComplete-{{ id }}">
         Completada
       </label>
     </div>

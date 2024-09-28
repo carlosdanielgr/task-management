@@ -3,7 +3,11 @@
   <article class="content">
     <app-task-filter />
     <section class="content__tasks">
-      <app-task *ngFor="let item of tasks" [task]="item" />
+      <app-task
+        *ngFor="let item of tasks; let i = index"
+        [task]="item"
+        [id]="i"
+      />
     </section>
   </article>
   <app-footer />

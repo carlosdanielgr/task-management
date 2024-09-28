@@ -2,12 +2,12 @@ import { createSelector } from '@ngrx/store';
 import { AppState } from '@shared/interfaces/state.interface';
 import { Task } from '@shared/interfaces/task.interface';
 
-const currentTasks = (name: AppState) => [...name.tasks, ...name.externalTasks];
+const currentTasks = (name: AppState) => name.tasks;
 
 export const selectorTasks = createSelector(currentTasks, (tasks) => tasks);
 
 const currentFilter = (name: AppState) => {
-  const tasks = currentTasks(name);
+  const tasks = name.tasks;
   const filters = {
     completed: (task: Task) => task.completed,
     pending: (task: Task) => !task.completed,

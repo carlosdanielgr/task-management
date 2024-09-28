@@ -1,8 +1,9 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/interfaces/state.interface';
-import { actionChangeTaskStatus } from 'src/app/state/actions/task.action';
+import { actionNewTask } from 'src/app/state/actions/task.action';
 
 export interface Task {
   title: string;
@@ -14,11 +15,13 @@ export interface Task {
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, ReactiveFormsModule],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
+  @Input() id = 0;
+
   @Input() task: Task = {
     title: '',
     date: '',
@@ -26,9 +29,20 @@ export class TaskComponent {
     people: [],
   };
 
+  checkControl = new FormControl(false);
+
   constructor(private readonly store: Store<AppState>) {}
 
-  onToggleComplete(state: boolean) {
-    this.store.dispatch(actionChangeTaskStatus({ state }));
+  ngOnInit(): void {
+    this.checkControl.setValue(this.task.completed);
+  }
+
+  onToggleComplete() {
+    this.store.dispatch(
+      actionNewTask({
+        task: { ...this.task, completed: this.checkControl.value as boolean },
+        isEdit: true,
+      })
+    );
   }
 }
