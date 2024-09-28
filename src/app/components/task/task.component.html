@@ -3,12 +3,31 @@
     <span class="text-secondary">{{ task.date }}</span>
   </div>
   <div class="card-body pt-0">
-    <h6 class="card-title text-primary text-center">
+    <h5 class="card-title text-primary text-center">
       {{ task.title }}
-    </h6>
-    <div *ngIf="task.people.length; else notPersons"></div>
+    </h5>
+    <div *ngIf="task.people.length; else notPersons">
+      <strong>Personas asociadas:</strong>
+      <ng-container *ngFor="let person of task.people">
+        <ul>
+          <li>
+            {{ person.name }} ({{ person.age }})
+            <div>
+              <span>
+                Habilidades:
+                <ng-container
+                  *ngFor="let skill of person.skills; let lastItem = last"
+                >
+                  {{ skill }}<ng-container *ngIf="!lastItem">,</ng-container>
+                </ng-container>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
   </div>
-  <div class="card-footer">
+  <div class="card-footer d-flex justify-content-end">
     <div class="form-check">
       <input
         class="form-check-input"

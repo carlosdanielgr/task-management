@@ -9,7 +9,7 @@ import { NameFilter } from '@shared/interfaces/filter.interface';
 
 export const reducerExternalTask = createReducer(
   [] as Task[],
-  on(actionExternalTask, (currentState, next) => next.tasks)
+  on(actionExternalTask, (currentState, { tasks }) => tasks)
 );
 
 export const reducerNewTask = createReducer(
@@ -23,5 +23,5 @@ export const reducerNewTask = createReducer(
 
 export const reducerNewFilter = createReducer(
   'all' as NameFilter,
-  on(actionNewFilter, (currentState, next) => next.name)
+  on(actionNewFilter, (currentState, { name }) => name)
 );

@@ -15,10 +15,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.API_URL).pipe(
       map((task) =>
         task.slice(0, 10).map(
-          (data) =>
+          (data, index) =>
             ({
               title: data.title,
-              completed: true,
+              completed: index < 5 ? true : false,
               date: new Date().toISOString().split('T')[0],
               people: [],
             } as Task)

@@ -13,3 +13,8 @@ export const actionNewFilter = createAction(
   '[Task] New filter',
   props<FilterTask>()
 );
+
+export const actionChangeTaskStatus = createAction(
+  '[Task] New task status',
+  props<{ state: boolean }>()
+);

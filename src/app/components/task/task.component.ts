@@ -1,5 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '@shared/interfaces/state.interface';
+import { actionChangeTaskStatus } from 'src/app/state/actions/task.action';
 
 export interface Task {
   title: string;
@@ -22,4 +25,10 @@ export class TaskComponent {
     completed: false,
     people: [],
   };
+
+  constructor(private readonly store: Store<AppState>) {}
+
+  onToggleComplete(state: boolean) {
+    this.store.dispatch(actionChangeTaskStatus({ state }));
+  }
 }
