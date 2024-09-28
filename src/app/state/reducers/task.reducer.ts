@@ -1,6 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionNewTask } from '../actions/task.action';
+import {
+  actionExternalTask,
+  actionNewFilter,
+  actionNewTask,
+} from '../actions/task.action';
 import { Task } from '@shared/interfaces/task.interface';
+import { NameFilter } from '@shared/interfaces/filter.interface';
+
+export const reducerExternalTask = createReducer(
+  [] as Task[],
+  on(actionExternalTask, (currentState, next) => next.tasks)
+);
 
 export const reducerNewTask = createReducer(
   [] as Task[],
@@ -9,4 +19,9 @@ export const reducerNewTask = createReducer(
     tasks.push(next);
     return tasks;
   })
+);
+
+export const reducerNewFilter = createReducer(
+  'all' as NameFilter,
+  on(actionNewFilter, (currentState, next) => next.name)
 );

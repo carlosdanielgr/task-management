@@ -1,7 +1,28 @@
 <div class="task-filter">
   <div class="btn-group">
-    <button type="button" class="btn btn-primary active">Todas</button>
-    <button type="button" class="btn btn-primary">Pendientes</button>
-    <button type="button" class="btn btn-primary">Completadas</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [class.active]="currentFilter === 'all'"
+      (click)="onToggleFilter('all')"
+    >
+      Todas
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [class.active]="currentFilter === 'pending'"
+      (click)="onToggleFilter('pending')"
+    >
+      Pendientes
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [class.active]="currentFilter === 'completed'"
+      (click)="onToggleFilter('completed')"
+    >
+      Completadas
+    </button>
   </div>
 </div>
