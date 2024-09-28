@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Task } from '@shared/interfaces/task.interface';
 import { map } from 'rxjs';
-import { Task } from './components/task/task.component';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class TaskService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getCurrentTasks() {
+  getExternalTasks() {
     return this.http.get<Task[]>(this.API_URL).pipe(
       map((task) =>
         task.slice(0, 10).map(

@@ -12,6 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dateAfterOrEqualToday } from './date-validator';
 import { NgFor, NgIf } from '@angular/common';
 import { uniqueNameValidator } from './person-validator';
+import { AppState } from '@shared/interfaces/state.interface';
+import { Store } from '@ngrx/store';
+import { actionNewTask } from 'src/app/state/actions/task.action';
 
 type PersonForm = FormGroup<{
   name: FormControl<string | null>;
@@ -30,7 +33,8 @@ export class CreateTaskComponent implements OnInit {
   form!: FormGroup;
   constructor(
     private readonly modalService: NgbModal,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +86,8 @@ export class CreateTaskComponent implements OnInit {
   }
 
   saveTask() {
-    console.log(this.form.value);
+    this.store.dispatch(actionNewTask(this.form.value));
+    this.closeModal();
   }
 
   get date() {

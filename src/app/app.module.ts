@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TaskFilterComponent } from './components/task-filter/task-filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS } from './state/app.state';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     TaskFilterComponent,
   ],
-  imports: [BrowserModule, TaskComponent, NgbModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    TaskComponent,
+    NgbModule,
+    HttpClientModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
