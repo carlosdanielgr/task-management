@@ -23,6 +23,7 @@ export class ViewTaskComponent {
   }
 
   openManageTask() {
+    this.closeModal();
     const modalRef = this.modalService.open(ManageTaskComponent);
     modalRef.componentInstance.task = this.task;
   }

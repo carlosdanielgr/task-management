@@ -10,6 +10,7 @@
     ></button>
   </div>
   <div class="modal-body">
+    <p>{{ task.description ?? "No hay descripción" }}</p>
     <strong>Personas asociadas:</strong>
     <ng-container *ngFor="let person of task.people">
       <ul>

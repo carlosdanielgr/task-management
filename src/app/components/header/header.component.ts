@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateTaskComponent } from '../create-task/create-task.component';
+import { ManageTaskComponent } from '../manage-task/manage-task.component';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,6 @@ export class HeaderComponent {
   constructor(private readonly modalService: NgbModal) {}
 
   openCreateTask() {
-    this.modalService.open(CreateTaskComponent);
+    this.modalService.open(ManageTaskComponent);
   }
 }
