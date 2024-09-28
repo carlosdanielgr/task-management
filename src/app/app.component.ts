@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TaskService } from './services/task.service';
-import { Task } from './components/task/task.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/interfaces/state.interface';
 import { selectorFilter, selectorTasks } from './state/selectors/task.selector';
 import { Subject, takeUntil } from 'rxjs';
 import { actionNewTask } from './state/actions/task.action';
+import { Task } from '@shared/interfaces/task.interface';
 
 @Component({
   selector: 'app-root',

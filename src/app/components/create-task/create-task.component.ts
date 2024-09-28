@@ -44,6 +44,7 @@ export class CreateTaskComponent implements OnInit {
   private formInit() {
     this.form = this.fb.group({
       title: ['', Validators.required],
+      description: [''],
       date: ['', [Validators.required, dateAfterOrEqualToday()]],
       completed: false,
       people: this.fb.array([], Validators.required),

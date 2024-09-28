@@ -14,7 +14,7 @@ export const reducerNewTask = createReducer(
       tasks[indexTask] = next.task;
       return tasks;
     }
-    tasks.push(next.task);
+    tasks.unshift(next.task);
     return tasks;
   })
 );

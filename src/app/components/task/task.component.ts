@@ -1,16 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/interfaces/state.interface';
+import { Task } from '@shared/interfaces/task.interface';
 import { actionNewTask } from 'src/app/state/actions/task.action';
-
-export interface Task {
-  title: string;
-  date: string;
-  completed: boolean;
-  people: any[];
-}
+import { ViewTaskComponent } from './view-task/view-task.component';
 
 @Component({
   selector: 'app-task',
@@ -29,12 +25,29 @@ export class TaskComponent implements OnInit {
     people: [],
   };
 
+  description = '';
+
   checkControl = new FormControl(false);
 
-  constructor(private readonly store: Store<AppState>) {}
+  constructor(
+    private readonly store: Store<AppState>,
+    private readonly modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.checkControl.setValue(this.task.completed);
+    if (this.task.description) {
+      if (this.task.description?.length > 40)
+        this.description = this.task.description?.slice(0, 40) + '...';
+      else this.description = this.task.description;
+    }
+  }
+
+  openViewTask() {
+    const modalRef = this.modalService.open(ViewTaskComponent, {
+      centered: true,
+    });
+    modalRef.componentInstance.task = this.task;
   }
 
   onToggleComplete() {

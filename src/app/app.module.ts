@@ -10,6 +10,7 @@ import { TaskFilterComponent } from './components/task-filter/task-filter.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCERS } from './state/app.state';
+import { ViewTaskComponent } from './components/task/view-task/view-task.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ROOT_REDUCERS } from './state/app.state';
     HeaderComponent,
     FooterComponent,
     TaskFilterComponent,
+    ViewTaskComponent,
   ],
   imports: [
     BrowserModule,

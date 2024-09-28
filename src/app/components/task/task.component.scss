@@ -1,3 +1,11 @@
 .task {
+  position: relative;
   box-shadow: 0px 0px 10px #00000047;
+  .card-body:hover {
+    .card-title {
+      transform: scale(1.1);
+      transition: all 0.5s;
+      filter: drop-shadow(0px 0px 10px #00000086);
+    }
+  }
 }

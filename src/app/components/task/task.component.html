@@ -2,29 +2,14 @@
   <div class="text-end p-2">
     <span class="text-secondary">{{ task.date }}</span>
   </div>
-  <div class="card-body pt-0">
-    <h5 class="card-title text-primary text-center">
+  <div role="button" class="card-body pt-0" (click)="openViewTask()">
+    <h6 class="card-title text-primary text-center">
       {{ task.title }}
-    </h5>
-    <div *ngIf="task.people.length; else notPersons">
-      <strong>Personas asociadas:</strong>
-      <ng-container *ngFor="let person of task.people">
-        <ul>
-          <li>
-            {{ person.name }} ({{ person.age }})
-            <div>
-              <span>
-                Habilidades:
-                <ng-container
-                  *ngFor="let skill of person.skills; let lastItem = last"
-                >
-                  {{ skill }}<ng-container *ngIf="!lastItem">,</ng-container>
-                </ng-container>
-              </span>
-            </div>
-          </li>
-        </ul>
-      </ng-container>
+    </h6>
+    <div *ngIf="description; else noDescription">
+      <p>
+        {{ description }}
+      </p>
     </div>
   </div>
   <div class="card-footer d-flex justify-content-end">
@@ -44,6 +29,6 @@
     </div>
   </div>
 </div>
-<ng-template #notPersons>
-  <span>No hay personas vinculadas a esta tarea.</span>
+<ng-template #noDescription>
+  <span>No hay descripción.</span>
 </ng-template>
